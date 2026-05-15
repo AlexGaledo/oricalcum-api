@@ -1,69 +1,97 @@
-from fastapi import APIRouter, HTTPException
+from typing import Annotated
+from fastapi import APIRouter, Depends, HTTPException
+from sqlalchemy.orm import Session
+from app.db.session import get_db
+from app.db.models import Edge
+from app.db.utils import assert_project_access
 from app.dependencies import CurrentUser
-from app.database import supabase
 from app.models.edge import EdgeCreate, EdgeUpdate, EdgePatch
 from app.schemas.response import ok
 
 router = APIRouter(prefix="/projects/{project_id}/edges", tags=["edges"])
 
-
-def _assert_project_access(project_id: str, user_id: str):
-    res = supabase.table("projects").select("owner_id, collaborators").eq("id", project_id).single().execute()
-    if not res.data:
-        raise HTTPException(status_code=404, detail="Project not found")
-    p = res.data
-    if p["owner_id"] != user_id and user_id not in p.get("collaborators", []):
-        raise HTTPException(status_code=403, detail="Forbidden")
+Db = Annotated[Session, Depends(get_db)]
 
 
 @router.get("")
-async def list_edges(project_id: str, user: CurrentUser):
-    _assert_project_access(project_id, user["id"])
-    res = supabase.table("edges").select("*").eq("project_id", project_id).execute()
-    return ok(res.data)
+async def list_edges(project_id: str, user: CurrentUser, db: Db):
+    assert_project_access(db, project_id, user["id"])
+    edges = db.query(Edge).filter(Edge.project_id == project_id).all()
+    return ok([_to_dict(e) for e in edges])
 
 
 @router.post("")
-async def create_edge(project_id: str, body: EdgeCreate, user: CurrentUser):
-    _assert_project_access(project_id, user["id"])
-    record = body.model_dump()
-    record["project_id"] = project_id
-    res = supabase.table("edges").insert(record).execute()
-    return ok(res.data[0] if res.data else record)
+async def create_edge(project_id: str, body: EdgeCreate, user: CurrentUser, db: Db):
+    assert_project_access(db, project_id, user["id"])
+    data = body.model_dump()
+    edge = Edge(project_id=project_id, metadata_=data.pop("metadata", {}), **data)
+    db.add(edge)
+    db.commit()
+    db.refresh(edge)
+    return ok(_to_dict(edge))
 
 
 @router.get("/{edge_id}")
-async def get_edge(project_id: str, edge_id: str, user: CurrentUser):
-    _assert_project_access(project_id, user["id"])
-    res = supabase.table("edges").select("*").eq("id", edge_id).eq("project_id", project_id).single().execute()
-    if not res.data:
+async def get_edge(project_id: str, edge_id: str, user: CurrentUser, db: Db):
+    assert_project_access(db, project_id, user["id"])
+    edge = db.query(Edge).filter(Edge.id == edge_id, Edge.project_id == project_id).first()
+    if not edge:
         raise HTTPException(status_code=404, detail="Edge not found")
-    return ok(res.data)
+    return ok(_to_dict(edge))
 
 
 @router.put("/{edge_id}")
-async def update_edge(project_id: str, edge_id: str, body: EdgeUpdate, user: CurrentUser):
-    _assert_project_access(project_id, user["id"])
-    res = supabase.table("edges").update(body.model_dump()).eq("id", edge_id).eq("project_id", project_id).execute()
-    if not res.data:
+async def update_edge(project_id: str, edge_id: str, body: EdgeUpdate, user: CurrentUser, db: Db):
+    assert_project_access(db, project_id, user["id"])
+    edge = db.query(Edge).filter(Edge.id == edge_id, Edge.project_id == project_id).first()
+    if not edge:
         raise HTTPException(status_code=404, detail="Edge not found")
-    return ok(res.data[0])
+    data = body.model_dump()
+    edge.metadata_ = data.pop("metadata", {})
+    for field, value in data.items():
+        setattr(edge, field, value)
+    db.commit()
+    db.refresh(edge)
+    return ok(_to_dict(edge))
 
 
 @router.patch("/{edge_id}")
-async def patch_edge(project_id: str, edge_id: str, body: EdgePatch, user: CurrentUser):
-    _assert_project_access(project_id, user["id"])
-    patch = {k: v for k, v in body.model_dump().items() if v is not None}
-    if not patch:
-        raise HTTPException(status_code=400, detail="No fields to update")
-    res = supabase.table("edges").update(patch).eq("id", edge_id).eq("project_id", project_id).execute()
-    if not res.data:
+async def patch_edge(project_id: str, edge_id: str, body: EdgePatch, user: CurrentUser, db: Db):
+    assert_project_access(db, project_id, user["id"])
+    edge = db.query(Edge).filter(Edge.id == edge_id, Edge.project_id == project_id).first()
+    if not edge:
         raise HTTPException(status_code=404, detail="Edge not found")
-    return ok(res.data[0])
+    data = body.model_dump(exclude_none=True)
+    if "metadata" in data:
+        edge.metadata_ = data.pop("metadata")
+    for field, value in data.items():
+        setattr(edge, field, value)
+    db.commit()
+    db.refresh(edge)
+    return ok(_to_dict(edge))
 
 
 @router.delete("/{edge_id}")
-async def delete_edge(project_id: str, edge_id: str, user: CurrentUser):
-    _assert_project_access(project_id, user["id"])
-    supabase.table("edges").delete().eq("id", edge_id).eq("project_id", project_id).execute()
+async def delete_edge(project_id: str, edge_id: str, user: CurrentUser, db: Db):
+    assert_project_access(db, project_id, user["id"])
+    edge = db.query(Edge).filter(Edge.id == edge_id, Edge.project_id == project_id).first()
+    if not edge:
+        raise HTTPException(status_code=404, detail="Edge not found")
+    db.delete(edge)
+    db.commit()
     return ok({"deleted": edge_id})
+
+
+def _to_dict(e: Edge) -> dict:
+    return {
+        "id": e.id,
+        "project_id": e.project_id,
+        "from_node": e.from_node,
+        "to_node": e.to_node,
+        "from_port": e.from_port,
+        "to_port": e.to_port,
+        "animation_style": e.animation_style,
+        "label": e.label,
+        "metadata": e.metadata_ or {},
+        "version": e.version,
+    }

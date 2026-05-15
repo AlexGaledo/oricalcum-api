@@ -14,14 +14,19 @@ class ProjectBase(BaseModel):
     collaborators: list[str] = []
     settings: dict[str, Any] = {}
     camera: Camera = Camera()
+    is_public: bool = False
 
 
 class ProjectCreate(ProjectBase):
-    pass
+    id: str | None = None
 
 
 class ProjectUpdate(ProjectBase):
     pass
+
+
+class ProjectShare(BaseModel):
+    is_public: bool
 
 
 class ProjectModel(ProjectBase):

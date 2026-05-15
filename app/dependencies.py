@@ -1,8 +1,8 @@
 from typing import Annotated
-import jwt
 from fastapi import Depends, HTTPException, status
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
-from app.config import settings
+from gotrue.errors import AuthApiError
+from app.auth_client import auth_client
 
 bearer_scheme = HTTPBearer()
 
@@ -10,20 +10,14 @@ bearer_scheme = HTTPBearer()
 async def get_current_user(
     credentials: Annotated[HTTPAuthorizationCredentials, Depends(bearer_scheme)],
 ) -> dict:
-    token = credentials.credentials
     try:
-        payload = jwt.decode(
-            token,
-            settings.supabase_jwt_secret,
-            algorithms=["HS256"],
-            audience="authenticated",
-        )
-    except jwt.ExpiredSignatureError:
-        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Token expired")
-    except jwt.InvalidTokenError:
-        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid token")
-
-    return {"id": payload["sub"], "email": payload.get("email", "")}
+        response = auth_client.auth.get_user(credentials.credentials)
+        user = response.user
+        if not user:
+            raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid token")
+        return {"id": user.id, "email": user.email}
+    except AuthApiError as e:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail=str(e))
 
 
 CurrentUser = Annotated[dict, Depends(get_current_user)]

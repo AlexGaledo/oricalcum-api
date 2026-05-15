@@ -1,69 +1,95 @@
-from fastapi import APIRouter, HTTPException
+from typing import Annotated
+from fastapi import APIRouter, Depends, HTTPException
+from sqlalchemy.orm import Session
+from app.db.session import get_db
+from app.db.models import Node
+from app.db.utils import assert_project_access
 from app.dependencies import CurrentUser
-from app.database import supabase
 from app.models.node import NodeCreate, NodeUpdate, NodePatch
 from app.schemas.response import ok
 
 router = APIRouter(prefix="/projects/{project_id}/nodes", tags=["nodes"])
 
-
-def _assert_project_access(project_id: str, user_id: str):
-    res = supabase.table("projects").select("owner_id, collaborators").eq("id", project_id).single().execute()
-    if not res.data:
-        raise HTTPException(status_code=404, detail="Project not found")
-    p = res.data
-    if p["owner_id"] != user_id and user_id not in p.get("collaborators", []):
-        raise HTTPException(status_code=403, detail="Forbidden")
+Db = Annotated[Session, Depends(get_db)]
 
 
 @router.get("")
-async def list_nodes(project_id: str, user: CurrentUser):
-    _assert_project_access(project_id, user["id"])
-    res = supabase.table("nodes").select("*").eq("project_id", project_id).execute()
-    return ok(res.data)
+async def list_nodes(project_id: str, user: CurrentUser, db: Db):
+    assert_project_access(db, project_id, user["id"])
+    nodes = db.query(Node).filter(Node.project_id == project_id).all()
+    return ok([_to_dict(n) for n in nodes])
 
 
 @router.post("")
-async def create_node(project_id: str, body: NodeCreate, user: CurrentUser):
-    _assert_project_access(project_id, user["id"])
-    record = body.model_dump()
-    record["project_id"] = project_id
-    res = supabase.table("nodes").insert(record).execute()
-    return ok(res.data[0] if res.data else record)
+async def create_node(project_id: str, body: NodeCreate, user: CurrentUser, db: Db):
+    assert_project_access(db, project_id, user["id"])
+    node = Node(project_id=project_id, **body.model_dump())
+    db.add(node)
+    db.commit()
+    db.refresh(node)
+    return ok(_to_dict(node))
 
 
 @router.get("/{node_id}")
-async def get_node(project_id: str, node_id: str, user: CurrentUser):
-    _assert_project_access(project_id, user["id"])
-    res = supabase.table("nodes").select("*").eq("id", node_id).eq("project_id", project_id).single().execute()
-    if not res.data:
+async def get_node(project_id: str, node_id: str, user: CurrentUser, db: Db):
+    assert_project_access(db, project_id, user["id"])
+    node = db.query(Node).filter(Node.id == node_id, Node.project_id == project_id).first()
+    if not node:
         raise HTTPException(status_code=404, detail="Node not found")
-    return ok(res.data)
+    return ok(_to_dict(node))
 
 
 @router.put("/{node_id}")
-async def update_node(project_id: str, node_id: str, body: NodeUpdate, user: CurrentUser):
-    _assert_project_access(project_id, user["id"])
-    res = supabase.table("nodes").update(body.model_dump()).eq("id", node_id).eq("project_id", project_id).execute()
-    if not res.data:
+async def update_node(project_id: str, node_id: str, body: NodeUpdate, user: CurrentUser, db: Db):
+    assert_project_access(db, project_id, user["id"])
+    node = db.query(Node).filter(Node.id == node_id, Node.project_id == project_id).first()
+    if not node:
         raise HTTPException(status_code=404, detail="Node not found")
-    return ok(res.data[0])
+    for field, value in body.model_dump().items():
+        setattr(node, field, value)
+    db.commit()
+    db.refresh(node)
+    return ok(_to_dict(node))
 
 
 @router.patch("/{node_id}")
-async def patch_node(project_id: str, node_id: str, body: NodePatch, user: CurrentUser):
-    _assert_project_access(project_id, user["id"])
-    patch = {k: v for k, v in body.model_dump().items() if v is not None}
-    if not patch:
-        raise HTTPException(status_code=400, detail="No fields to update")
-    res = supabase.table("nodes").update(patch).eq("id", node_id).eq("project_id", project_id).execute()
-    if not res.data:
+async def patch_node(project_id: str, node_id: str, body: NodePatch, user: CurrentUser, db: Db):
+    assert_project_access(db, project_id, user["id"])
+    node = db.query(Node).filter(Node.id == node_id, Node.project_id == project_id).first()
+    if not node:
         raise HTTPException(status_code=404, detail="Node not found")
-    return ok(res.data[0])
+    for field, value in body.model_dump(exclude_none=True).items():
+        setattr(node, field, value)
+    db.commit()
+    db.refresh(node)
+    return ok(_to_dict(node))
 
 
 @router.delete("/{node_id}")
-async def delete_node(project_id: str, node_id: str, user: CurrentUser):
-    _assert_project_access(project_id, user["id"])
-    supabase.table("nodes").delete().eq("id", node_id).eq("project_id", project_id).execute()
+async def delete_node(project_id: str, node_id: str, user: CurrentUser, db: Db):
+    assert_project_access(db, project_id, user["id"])
+    node = db.query(Node).filter(Node.id == node_id, Node.project_id == project_id).first()
+    if not node:
+        raise HTTPException(status_code=404, detail="Node not found")
+    db.delete(node)
+    db.commit()
     return ok({"deleted": node_id})
+
+
+def _to_dict(n: Node) -> dict:
+    return {
+        "id": n.id,
+        "project_id": n.project_id,
+        "x": n.x, "y": n.y, "w": n.w, "h": n.h,
+        "base_w": n.base_w, "base_h": n.base_h,
+        "shape": n.shape,
+        "title": n.title,
+        "body": n.body,
+        "color": n.color,
+        "opacity": n.opacity,
+        "tags": n.tags or [],
+        "status": n.status,
+        "version": n.version,
+        "created_at": n.created_at,
+        "updated_at": n.updated_at,
+    }

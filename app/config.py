@@ -1,4 +1,7 @@
+from typing import Any
+
 from pydantic_settings import BaseSettings, SettingsConfigDict
+from typing import List
 
 
 class Settings(BaseSettings):
@@ -9,6 +12,10 @@ class Settings(BaseSettings):
     supabase_service_key: str
     frontend_url: str = "http://localhost:3000"
     api_prefix: str = "/api/v1"
+
+    @property
+    def frontend_urls(self) -> List[str]:
+        return [url.strip() for url in self.frontend_url.split(",")]
 
 
 def get_settings() -> Settings:

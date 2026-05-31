@@ -1,4 +1,5 @@
 import time
+import uuid
 from typing import Annotated
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
@@ -13,6 +14,14 @@ router = APIRouter(prefix="/sync", tags=["sync"])
 Db = Annotated[Session, Depends(get_db)]
 
 
+def _unique_id(db: Session, model) -> str:
+    prefix = model.__tablename__[0]
+    while True:
+        new_id = f"{prefix}_{uuid.uuid4().hex[:12]}"
+        if not db.query(model).filter(model.id == new_id).first():
+            return new_id
+
+
 def _sync_entities(db: Session, model, project_id: str, payload: SyncPayload) -> SyncResult:
     now = int(time.time() * 1000)
     pushed = 0
@@ -20,7 +29,7 @@ def _sync_entities(db: Session, model, project_id: str, payload: SyncPayload) ->
 
     for entity in payload.entities:
         data = entity.model_dump()
-        existing = db.query(model).filter(model.id == entity.id, model.project_id == project_id).first()
+        existing = db.query(model).filter(model.id == entity.id).first()
 
         if not existing:
             data["project_id"] = project_id
@@ -28,18 +37,27 @@ def _sync_entities(db: Session, model, project_id: str, payload: SyncPayload) ->
                 data["metadata_"] = data.pop("metadata")
             db.add(model(**data))
             pushed += 1
-        elif entity.version > existing.version:
+        elif existing.project_id == project_id:
+            if entity.version > existing.version:
+                if model is Edge and "metadata" in data:
+                    data["metadata_"] = data.pop("metadata")
+                for field, value in data.items():
+                    setattr(existing, field, value)
+                pushed += 1
+            elif entity.version < existing.version:
+                conflicts.append(ConflictInfo(
+                    id=entity.id,
+                    local_version=entity.version,
+                    server_version=existing.version,
+                ))
+        else:
+            new_id = _unique_id(db, model)
+            data["id"] = new_id
+            data["project_id"] = project_id
             if model is Edge and "metadata" in data:
                 data["metadata_"] = data.pop("metadata")
-            for field, value in data.items():
-                setattr(existing, field, value)
+            db.add(model(**data))
             pushed += 1
-        elif entity.version < existing.version:
-            conflicts.append(ConflictInfo(
-                id=entity.id,
-                local_version=entity.version,
-                server_version=existing.version,
-            ))
 
     db.commit()
 

@@ -25,6 +25,14 @@ class ProjectUpdate(ProjectBase):
     pass
 
 
+class ProjectPatch(BaseModel):
+    name: str | None = None
+    description: str | None = None
+    collaborators: list[str] | None = None
+    settings: dict[str, Any] | None = None
+    camera: Camera | None = None
+
+
 class ProjectShare(BaseModel):
     is_public: bool
 

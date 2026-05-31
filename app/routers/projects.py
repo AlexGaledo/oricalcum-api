@@ -6,7 +6,7 @@ from sqlalchemy.orm import Session
 from app.db.session import get_db
 from app.db.models import Project
 from app.dependencies import CurrentUser
-from app.models.project import ProjectCreate, ProjectUpdate, ProjectShare
+from app.models.project import ProjectCreate, ProjectUpdate, ProjectPatch, ProjectShare
 from app.schemas.response import ok
 
 router = APIRouter(prefix="/projects", tags=["projects"])
@@ -72,6 +72,24 @@ async def update_project(project_id: str, body: ProjectUpdate, user: CurrentUser
     project.collaborators = body.collaborators
     project.settings = body.settings
     project.camera = body.camera.model_dump()
+    project.updated_at = int(time.time() * 1000)
+    db.commit()
+    db.refresh(project)
+    return ok(_to_dict(project))
+
+
+@router.patch("/{project_id}")
+async def patch_project(project_id: str, body: ProjectPatch, user: CurrentUser, db: Db):
+    project = db.get(Project, project_id)
+    if not project:
+        raise HTTPException(status_code=404, detail="Project not found")
+    if project.owner_id != user["id"]:
+        raise HTTPException(status_code=403, detail="Forbidden")
+    data = body.model_dump(exclude_none=True)
+    if "camera" in data:
+        project.camera = data.pop("camera")
+    for field, value in data.items():
+        setattr(project, field, value)
     project.updated_at = int(time.time() * 1000)
     db.commit()
     db.refresh(project)

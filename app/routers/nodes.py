@@ -23,6 +23,9 @@ async def list_nodes(project_id: str, user: CurrentUser, db: Db):
 @router.post("")
 async def create_node(project_id: str, body: NodeCreate, user: CurrentUser, db: Db):
     assert_project_access(db, project_id, user["id"])
+    existing = db.query(Node).filter(Node.id == body.id).first()
+    if existing:
+        raise HTTPException(status_code=409, detail=f"Node with id '{body.id}' already exists")
     node = Node(project_id=project_id, **body.model_dump())
     db.add(node)
     db.commit()

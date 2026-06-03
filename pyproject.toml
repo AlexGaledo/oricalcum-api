@@ -14,3 +14,13 @@ dependencies = [
     "psycopg2-binary",
     "alembic>=1.13",
 ]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.0.3",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+addopts = "-ra"

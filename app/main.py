@@ -2,7 +2,7 @@ from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from app.config import Settings
-from app.routers import projects, nodes, edges, documents, sync, snapshots, public
+from app.routers import projects, nodes, edges, documents, sync, snapshots, public, auth
 
 
 def create_app(settings: Settings | None = None) -> FastAPI:
@@ -31,6 +31,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         )
 
     prefix = settings.api_prefix
+    app.include_router(auth.router, prefix=prefix)
     app.include_router(projects.router, prefix=prefix)
     app.include_router(nodes.router, prefix=prefix)
     app.include_router(edges.router, prefix=prefix)

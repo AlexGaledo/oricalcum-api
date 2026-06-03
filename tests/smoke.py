@@ -62,7 +62,7 @@ def main() -> int:
             _token = r.json()["data"]["access_token"]
 
         # --- projects ---
-        pid = f"p_{uuid.uuid4().hex[:12]}"
+        pid = str(uuid.uuid4())
         call("project.create", "POST", "/projects",
              json={"id": pid, "name": "Smoke", "description": ""})
         call("project.list", "GET", "/projects")
@@ -75,11 +75,11 @@ def main() -> int:
 
         # --- nodes ---
         ts = now_ms()
-        a = {"id": f"n_{uuid.uuid4().hex[:10]}", "x": 0, "y": 0, "w": 100, "h": 80,
+        a = {"id": str(uuid.uuid4()), "x": 0, "y": 0, "w": 100, "h": 80,
              "base_w": 100, "base_h": 80, "shape": "rectangle", "title": "A", "body": "",
              "color": None, "opacity": None, "tags": [], "status": "active",
              "version": 1, "created_at": ts, "updated_at": ts}
-        b = {**a, "id": f"n_{uuid.uuid4().hex[:10]}", "title": "B"}
+        b = {**a, "id": str(uuid.uuid4()), "title": "B"}
         call("node.create", "POST", f"/projects/{pid}/nodes", json=a)
         call("node.create2", "POST", f"/projects/{pid}/nodes", json=b)
         call("node.list", "GET", f"/projects/{pid}/nodes")
@@ -90,7 +90,7 @@ def main() -> int:
              json={**a, "version": 2, "updated_at": now_ms()})
 
         # --- edges ---
-        eid = f"e_{uuid.uuid4().hex[:10]}"
+        eid = str(uuid.uuid4())
         edge = {"id": eid, "from_node": a["id"], "to_node": b["id"],
                 "from_port": "right", "to_port": "left", "animation_style": None,
                 "label": None, "metadata": {}, "version": 1}

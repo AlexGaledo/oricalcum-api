@@ -109,7 +109,7 @@ def auth_headers(auth_account) -> dict:
 @pytest.fixture
 def project(client: TestClient, auth_headers: dict):
     """Create a project owned by auth_account; delete it (cascade) on teardown."""
-    pid = f"p_{uuid.uuid4().hex[:12]}"
+    pid = str(uuid.uuid4())
     resp = client.post(
         "/api/v1/projects",
         json={"id": pid, "name": "Test Project", "description": "fixture"},
@@ -131,7 +131,7 @@ def now_ms() -> int:
 def node_payload(node_id: str | None = None, **overrides) -> dict:
     ts = now_ms()
     body = {
-        "id": node_id or f"n_{uuid.uuid4().hex[:12]}",
+        "id": node_id or str(uuid.uuid4()),
         "x": 10.0, "y": 20.0, "w": 200.0, "h": 120.0,
         "base_w": 200.0, "base_h": 120.0,
         "shape": "rectangle", "title": "Node", "body": "<p>hi</p>",
@@ -144,7 +144,7 @@ def node_payload(node_id: str | None = None, **overrides) -> dict:
 
 def edge_payload(edge_id: str | None = None, *, from_node: str, to_node: str, **overrides) -> dict:
     body = {
-        "id": edge_id or f"e_{uuid.uuid4().hex[:12]}",
+        "id": edge_id or str(uuid.uuid4()),
         "from_node": from_node, "to_node": to_node,
         "from_port": "right", "to_port": "left",
         "animation_style": None, "label": None,

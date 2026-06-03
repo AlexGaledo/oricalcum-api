@@ -4,7 +4,7 @@ from conftest import edge_payload, node_payload
 
 
 def test_delete_project_cascades(client, auth_headers):
-    pid = f"p_{uuid.uuid4().hex[:12]}"
+    pid = str(uuid.uuid4())
     client.post(
         "/api/v1/projects",
         json={"id": pid, "name": "Cascade", "description": ""},

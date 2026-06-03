@@ -14,12 +14,8 @@ router = APIRouter(prefix="/sync", tags=["sync"])
 Db = Annotated[Session, Depends(get_db)]
 
 
-def _unique_id(db: Session, model) -> str:
-    prefix = model.__tablename__[0]
-    while True:
-        new_id = f"{prefix}_{uuid.uuid4().hex[:12]}"
-        if not db.query(model).filter(model.id == new_id).first():
-            return new_id
+def _unique_id() -> str:
+    return str(uuid.uuid4())
 
 
 def _sync_entities(db: Session, model, project_id: str, payload: SyncPayload) -> SyncResult:
@@ -51,7 +47,7 @@ def _sync_entities(db: Session, model, project_id: str, payload: SyncPayload) ->
                     server_version=existing.version,
                 ))
         else:
-            new_id = _unique_id(db, model)
+            new_id = _unique_id()
             data["id"] = new_id
             data["project_id"] = project_id
             if model is Edge and "metadata" in data:

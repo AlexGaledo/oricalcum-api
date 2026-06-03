@@ -77,5 +77,5 @@ def test_node_requires_project_access(client, project, second_account):
 def test_node_missing_404(client, project, auth_headers):
     pid = project["id"]
     assert client.get(
-        f"/api/v1/projects/{pid}/nodes/n_{uuid.uuid4().hex}", headers=auth_headers
+        f"/api/v1/projects/{pid}/nodes/{uuid.uuid4()}", headers=auth_headers
     ).status_code == 404

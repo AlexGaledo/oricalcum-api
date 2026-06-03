@@ -2,7 +2,7 @@ import uuid
 
 
 def test_project_crud(client, auth_headers):
-    pid = f"p_{uuid.uuid4().hex[:12]}"
+    pid = str(uuid.uuid4())
     # create
     r = client.post(
         "/api/v1/projects",
@@ -80,7 +80,7 @@ def test_share_toggle(client, project, auth_headers):
 
 
 def test_project_not_found(client, auth_headers):
-    assert client.get(f"/api/v1/projects/p_{uuid.uuid4().hex}", headers=auth_headers).status_code == 404
+    assert client.get(f"/api/v1/projects/{uuid.uuid4()}", headers=auth_headers).status_code == 404
 
 
 def test_project_forbidden_for_other_user(client, project, second_account):

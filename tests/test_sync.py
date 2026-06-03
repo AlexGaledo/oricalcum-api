@@ -1,3 +1,5 @@
+import uuid
+
 import pytest
 
 from conftest import node_payload, now_ms
@@ -53,7 +55,7 @@ def test_sync_edges_push(client, project, auth_headers):
     client.post(f"/api/v1/projects/{pid}/nodes", json=a, headers=auth_headers)
     client.post(f"/api/v1/projects/{pid}/nodes", json=b, headers=auth_headers)
     edge = {
-        "id": "e_sync_1", "from_node": a["id"], "to_node": b["id"],
+        "id": str(uuid.uuid4()), "from_node": a["id"], "to_node": b["id"],
         "from_port": "right", "to_port": "left", "metadata": {},
         "version": 1, "updated_at": now_ms(),
     }

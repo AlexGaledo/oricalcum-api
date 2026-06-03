@@ -23,7 +23,7 @@ class NodeBase(BaseModel):
 
 
 class NodeCreate(NodeBase):
-    id: str
+    id: str | None = None
     version: int = 1
     created_at: int
     updated_at: int
@@ -53,4 +53,5 @@ class NodePatch(BaseModel):
 
 
 class NodeModel(NodeCreate):
+    id: str
     project_id: str

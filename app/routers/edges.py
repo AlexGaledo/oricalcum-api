@@ -1,3 +1,4 @@
+import uuid
 from typing import Annotated
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
@@ -23,10 +24,13 @@ async def list_edges(project_id: str, user: CurrentUser, db: Db):
 @router.post("")
 async def create_edge(project_id: str, body: EdgeCreate, user: CurrentUser, db: Db):
     assert_project_access(db, project_id, user["id"])
-    existing = db.query(Edge).filter(Edge.id == body.id).first()
-    if existing:
-        raise HTTPException(status_code=409, detail=f"Edge with id '{body.id}' already exists")
+    edge_id = body.id or str(uuid.uuid4())
+    if body.id:
+        existing = db.query(Edge).filter(Edge.id == edge_id).first()
+        if existing:
+            raise HTTPException(status_code=409, detail=f"Edge with id '{edge_id}' already exists")
     data = body.model_dump()
+    data["id"] = edge_id
     edge = Edge(project_id=project_id, metadata_=data.pop("metadata", {}), **data)
     db.add(edge)
     db.commit()

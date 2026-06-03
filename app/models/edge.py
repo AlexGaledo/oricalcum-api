@@ -17,7 +17,7 @@ class EdgeBase(BaseModel):
 
 
 class EdgeCreate(EdgeBase):
-    id: str
+    id: str | None = None
     version: int = 1
 
 
@@ -37,4 +37,5 @@ class EdgePatch(BaseModel):
 
 
 class EdgeModel(EdgeCreate):
+    id: str
     project_id: str

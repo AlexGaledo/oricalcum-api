@@ -54,7 +54,7 @@ def test_edge_crud(client, project, auth_headers):
 def test_edge_missing_404(client, project, auth_headers):
     pid = project["id"]
     assert client.get(
-        f"/api/v1/projects/{pid}/edges/e_{uuid.uuid4().hex}", headers=auth_headers
+        f"/api/v1/projects/{pid}/edges/{uuid.uuid4()}", headers=auth_headers
     ).status_code == 404
 
 

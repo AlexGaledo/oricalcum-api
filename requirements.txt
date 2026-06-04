@@ -8,6 +8,7 @@ alembic==1.14.0
 psycopg2-binary==2.9.10
 python-dotenv==1.0.1
 cryptography>=42.0.0
+boto3>=1.35.0
 
 # AI assistant (MCP + LangChain Gemini agent)
 fastmcp>=3.4.0

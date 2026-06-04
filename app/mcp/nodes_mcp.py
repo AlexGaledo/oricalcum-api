@@ -89,7 +89,8 @@ def create_node(
     h: float = _DEFAULT_H,
 ) -> dict:
     """Create a new node (card) or task on the canvas. A task is a node with a
-    meaningful `status`. `body` is rich-text/markdown content. Returns the node."""
+    meaningful `status`. `body` is rich-text/markdown content. Returns the node.
+    After creating, call `connect_nodes` to link it to related nodes."""
     with scoped_session() as s:
         now = _now_ms()
         node = Node(

@@ -12,6 +12,7 @@ from app.mcp.context import scoped_session
 from app.mcp.oricalcum_mcp import mcp
 from app.models.edge import AnimationStyle, Port
 from app.routers.edges import _to_dict as edge_to_dict
+from app.routers.nodes import _to_dict as node_to_dict
 
 
 def _node_exists(s, node_id: str) -> bool:
@@ -81,6 +82,58 @@ def connect_nodes(
         s.db.commit()
         s.db.refresh(edge)
         return edge_to_dict(edge)
+
+
+@mcp.tool
+def get_node_connections(node_id: str) -> dict:
+    """Get all nodes connected to a given node, including both incoming and
+    outgoing edges. Returns lists of incoming edges (other nodes pointing to
+    this node) and outgoing edges (this node pointing to other nodes), each
+    with the full edge data and the connected node's summary. Use this to
+    understand the context around a node — who it references and who
+    references it."""
+    with scoped_session() as s:
+        node = (
+            s.db.query(Node)
+            .filter(Node.id == node_id, Node.project_id == s.project_id)
+            .first()
+        )
+        if not node:
+            raise ValueError(f"Node '{node_id}' not found in this workspace")
+
+        incoming = (
+            s.db.query(Edge)
+            .filter(
+                Edge.project_id == s.project_id,
+                Edge.to_node == node_id,
+            )
+            .all()
+        )
+        outgoing = (
+            s.db.query(Edge)
+            .filter(
+                Edge.project_id == s.project_id,
+                Edge.from_node == node_id,
+            )
+            .all()
+        )
+
+        def _enrich(edge: Edge, peer_col: str) -> dict:
+            d = edge_to_dict(edge)
+            peer_id = getattr(edge, peer_col)
+            peer = (
+                s.db.query(Node)
+                .filter(Node.id == peer_id)
+                .first()
+            )
+            d["peer"] = node_to_dict(peer) if peer else None
+            return d
+
+        return {
+            "node_id": node_id,
+            "incoming": [_enrich(e, "from_node") for e in incoming],
+            "outgoing": [_enrich(e, "to_node") for e in outgoing],
+        }
 
 
 @mcp.tool

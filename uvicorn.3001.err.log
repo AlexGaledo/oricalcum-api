@@ -1,219 +1,87 @@
-INFO:     Started server process [38116]
+INFO:     Started server process [28060]
 INFO:     Waiting for application startup.
-2026-06-04 23:56:16  INFO      mcp.server.streamable_http_manager  StreamableHTTP session manager started
+2026-06-05 00:25:45  INFO      mcp.server.streamable_http_manager  StreamableHTTP session manager started
 INFO:     Application startup complete.
 INFO:     Uvicorn running on http://127.0.0.1:3001 (Press CTRL+C to quit)
-2026-06-04 23:56:22  INFO      oricalcum  GET /health -> 200  (6ms)
-2026-06-04 23:56:40  INFO      oricalcum  OPTIONS /api/v1/projects/ws_002/calendar-events -> 200  (2ms)
-2026-06-04 23:56:40  INFO      oricalcum  OPTIONS /api/v1/projects/ws_002 -> 200  (1ms)
-2026-06-04 23:56:40  INFO      oricalcum  OPTIONS /api/v1/projects/ws_002/calendar-events -> 200  (1ms)
-2026-06-04 23:56:41  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
-2026-06-04 23:56:41  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
-2026-06-04 23:56:44  INFO      oricalcum  GET /api/v1/projects/ws_002/calendar-events -> 200  (3549ms)
-2026-06-04 23:56:44  INFO      oricalcum  GET /api/v1/projects/ws_002 -> 200  (3551ms)
-2026-06-04 23:56:44  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
-2026-06-04 23:56:44  INFO      oricalcum  GET /api/v1/projects/ws_002/calendar-events -> 200  (886ms)
-2026-06-04 23:56:49  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
-2026-06-04 23:56:49  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
-2026-06-04 23:56:49  INFO      oricalcum  GET /api/v1/projects/ws_002/calendar-events -> 200  (626ms)
-2026-06-04 23:56:49  INFO      oricalcum  GET /api/v1/projects/ws_002 -> 200  (716ms)
-2026-06-04 23:56:50  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
-2026-06-04 23:56:50  INFO      oricalcum  OPTIONS /api/v1/projects/ws_002/nodes -> 200  (1ms)
-2026-06-04 23:56:50  INFO      oricalcum  OPTIONS /api/v1/projects/ws_002/edges -> 200  (5ms)
-2026-06-04 23:56:50  INFO      oricalcum  GET /api/v1/projects/ws_002/calendar-events -> 200  (482ms)
-2026-06-04 23:56:50  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
-2026-06-04 23:56:50  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
-2026-06-04 23:56:50  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
-2026-06-04 23:56:51  INFO      oricalcum  GET /api/v1/projects/ws_002 -> 200  (1054ms)
-2026-06-04 23:56:51  INFO      oricalcum  GET /api/v1/projects/ws_002/nodes -> 200  (1056ms)
-2026-06-04 23:56:51  INFO      oricalcum  GET /api/v1/projects/ws_002/edges -> 200  (1058ms)
-2026-06-04 23:56:52  INFO      oricalcum  OPTIONS /api/v1/projects/ws_002/storage -> 200  (0ms)
-2026-06-04 23:56:52  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
-2026-06-04 23:56:54  INFO      oricalcum  GET /api/v1/projects/ws_002/storage -> 200  (2241ms)
-2026-06-04 23:56:55  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
-2026-06-04 23:56:55  INFO      oricalcum  GET /api/v1/projects/ws_002/storage -> 200  (554ms)
-2026-06-04 23:57:14  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
-2026-06-04 23:57:14  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
-2026-06-04 23:57:14  INFO      oricalcum  GET /api/v1/projects/ws_002/calendar-events -> 200  (991ms)
-2026-06-04 23:57:15  INFO      oricalcum  GET /api/v1/projects/ws_002 -> 200  (686ms)
-2026-06-04 23:57:15  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
-2026-06-04 23:57:15  INFO      oricalcum  GET /api/v1/projects/ws_002/calendar-events -> 200  (439ms)
-2026-06-04 23:57:15  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
-2026-06-04 23:57:16  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
-2026-06-04 23:57:16  INFO      oricalcum  GET /api/v1/projects/ws_002/nodes -> 200  (563ms)
-2026-06-04 23:57:16  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
-2026-06-04 23:57:16  INFO      oricalcum  GET /api/v1/projects/ws_002/edges -> 200  (764ms)
-2026-06-04 23:57:16  INFO      oricalcum  GET /api/v1/projects/ws_002 -> 200  (651ms)
-2026-06-04 23:57:22  INFO      oricalcum  OPTIONS /api/v1/projects/ws_002/collaborators -> 200  (1ms)
-2026-06-04 23:57:22  INFO      oricalcum  OPTIONS /api/v1/projects/ws_002/collaborators -> 200  (3ms)
-2026-06-04 23:57:22  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
-2026-06-04 23:57:23  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/admin/users?page=&per_page= "HTTP/2 200 OK"
-2026-06-04 23:57:23  INFO      oricalcum  GET /api/v1/projects/ws_002/collaborators -> 200  (538ms)
-2026-06-04 23:57:23  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
-2026-06-04 23:57:23  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/admin/users?page=&per_page= "HTTP/2 200 OK"
-2026-06-04 23:57:23  INFO      oricalcum  GET /api/v1/projects/ws_002/collaborators -> 200  (453ms)
-2026-06-04 23:58:51  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
-2026-06-04 23:58:52  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
-2026-06-04 23:58:52  INFO      oricalcum  GET /api/v1/projects/ws_002/calendar-events -> 200  (937ms)
-2026-06-04 23:58:52  INFO      oricalcum  GET /api/v1/projects/ws_002 -> 200  (376ms)
-2026-06-04 23:58:52  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
-2026-06-04 23:58:52  INFO      oricalcum  GET /api/v1/projects/ws_002/calendar-events -> 200  (415ms)
-2026-06-04 23:58:52  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
-2026-06-04 23:58:53  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
-2026-06-04 23:58:53  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
-2026-06-04 23:58:53  INFO      oricalcum  GET /api/v1/projects/ws_002/edges -> 200  (1048ms)
-2026-06-04 23:58:53  INFO      oricalcum  GET /api/v1/projects/ws_002/nodes -> 200  (1053ms)
-2026-06-04 23:58:54  INFO      oricalcum  GET /api/v1/projects/ws_002 -> 200  (355ms)
-2026-06-04 23:58:59  INFO      oricalcum  OPTIONS /api/v1/projects/ws_002/calendar-events/ce_68cc1a69-b75f-4b0b-a359-60e83bd3b677 -> 200  (1ms)
-2026-06-04 23:58:59  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
-2026-06-04 23:59:00  INFO      oricalcum  DELETE /api/v1/projects/ws_002/calendar-events/ce_68cc1a69-b75f-4b0b-a359-60e83bd3b677 -> 200  (663ms)
-2026-06-04 23:59:02  INFO      oricalcum  OPTIONS /api/v1/projects/ws_002/calendar-events/ce_cbfdf999-7e8f-4eb8-b366-19318cb71ffd -> 200  (1ms)
-2026-06-04 23:59:02  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
-2026-06-04 23:59:03  INFO      oricalcum  DELETE /api/v1/projects/ws_002/calendar-events/ce_cbfdf999-7e8f-4eb8-b366-19318cb71ffd -> 200  (580ms)
-2026-06-04 23:59:18  INFO      oricalcum  OPTIONS /api/v1/projects/ws_002/chat -> 200  (0ms)
-2026-06-04 23:59:18  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
-2026-06-04 23:59:19  INFO      oricalcum  POST /api/v1/projects/ws_002/chat -> 200  (685ms)
-2026-06-04 23:59:19  INFO      httpx  HTTP Request: POST http://127.0.0.1:8000/mcp/ "HTTP/1.1 200 OK"
-2026-06-04 23:59:19  INFO      mcp.client.streamable_http  Received session ID: 3267810a00364528b18a9b0fbbbfac81
-2026-06-04 23:59:19  INFO      mcp.client.streamable_http  Negotiated protocol version: 2025-11-25
-2026-06-04 23:59:19  INFO      httpx  HTTP Request: POST http://127.0.0.1:8000/mcp/ "HTTP/1.1 202 Accepted"
-2026-06-04 23:59:19  INFO      httpx  HTTP Request: GET http://127.0.0.1:8000/mcp/ "HTTP/1.1 200 OK"
-2026-06-04 23:59:19  INFO      httpx  HTTP Request: POST http://127.0.0.1:8000/mcp/ "HTTP/1.1 200 OK"
-2026-06-04 23:59:19  INFO      httpx  HTTP Request: DELETE http://127.0.0.1:8000/mcp/ "HTTP/1.1 200 OK"
-2026-06-04 23:59:19  WARNING   langchain_google_genai._function_utils  Key 'additionalProperties' is not supported in schema, ignoring
-2026-06-04 23:59:19  WARNING   langchain_google_genai._function_utils  Key 'additionalProperties' is not supported in schema, ignoring
-2026-06-04 23:59:19  WARNING   langchain_google_genai._function_utils  Key 'additionalProperties' is not supported in schema, ignoring
-2026-06-04 23:59:19  WARNING   langchain_google_genai._function_utils  Key 'additionalProperties' is not supported in schema, ignoring
-2026-06-04 23:59:20  INFO      httpx  HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemma-4-31b-it:streamGenerateContent?alt=sse "HTTP/1.1 500 Internal Server Error"
-2026-06-04 23:59:20  INFO      google_genai._api_client  Retrying google.genai._api_client.BaseApiClient._async_request_once in 1.32 seconds as it raised ServerError: 500 INTERNAL. {'error': {'code': 500, 'message': 'Internal error encountered.', 'status': 'INTERNAL'}}.
-2026-06-04 23:59:23  INFO      httpx  HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemma-4-31b-it:streamGenerateContent?alt=sse "HTTP/1.1 200 OK"
-2026-06-04 23:59:33  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
-2026-06-04 23:59:33  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
-2026-06-04 23:59:34  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
-2026-06-04 23:59:34  INFO      oricalcum  GET /api/v1/projects/ws_002/nodes -> 200  (1400ms)
-2026-06-04 23:59:34  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
-2026-06-04 23:59:34  INFO      oricalcum  GET /api/v1/projects/ws_002/edges -> 200  (1281ms)
-2026-06-04 23:59:35  INFO      oricalcum  GET /api/v1/projects/ws_002 -> 200  (1355ms)
-2026-06-04 23:59:35  INFO      oricalcum  GET /api/v1/projects/ws_002/calendar-events -> 200  (1026ms)
-2026-06-05 00:02:58  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
-2026-06-05 00:02:58  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
-2026-06-05 00:02:58  INFO      oricalcum  GET /api/v1/projects/ws_002/calendar-events -> 200  (1536ms)
-2026-06-05 00:02:58  INFO      oricalcum  GET /api/v1/projects/ws_002 -> 200  (880ms)
-2026-06-05 00:02:59  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
-2026-06-05 00:02:59  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
-2026-06-05 00:02:59  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
-2026-06-05 00:02:59  INFO      oricalcum  GET /api/v1/projects/ws_002/calendar-events -> 200  (793ms)
-2026-06-05 00:03:00  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
-2026-06-05 00:03:00  INFO      oricalcum  GET /api/v1/projects/ws_002/edges -> 200  (1428ms)
-2026-06-05 00:03:00  INFO      oricalcum  GET /api/v1/projects/ws_002/nodes -> 200  (1429ms)
-2026-06-05 00:03:01  INFO      oricalcum  GET /api/v1/projects/ws_002 -> 200  (1100ms)
-2026-06-05 00:05:48  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
-2026-06-05 00:05:48  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
-2026-06-05 00:05:48  INFO      oricalcum  GET /api/v1/projects/ws_002/calendar-events -> 200  (1117ms)
-2026-06-05 00:05:49  INFO      oricalcum  GET /api/v1/projects/ws_002 -> 200  (387ms)
-2026-06-05 00:05:49  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
-2026-06-05 00:05:49  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
-2026-06-05 00:05:49  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
-2026-06-05 00:05:49  INFO      oricalcum  GET /api/v1/projects/ws_002/calendar-events -> 200  (815ms)
-2026-06-05 00:05:50  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
-2026-06-05 00:05:50  INFO      oricalcum  GET /api/v1/projects/ws_002/edges -> 200  (1434ms)
-2026-06-05 00:05:50  INFO      oricalcum  GET /api/v1/projects/ws_002/nodes -> 200  (1436ms)
-2026-06-05 00:05:50  INFO      oricalcum  GET /api/v1/projects/ws_002 -> 200  (398ms)
-2026-06-05 00:05:55  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
-2026-06-05 00:05:56  INFO      oricalcum  GET /api/v1/projects/ws_002/storage -> 200  (907ms)
-2026-06-05 00:05:56  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
-2026-06-05 00:05:56  INFO      oricalcum  GET /api/v1/projects/ws_002/storage -> 200  (534ms)
-2026-06-05 00:05:57  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
-2026-06-05 00:05:58  INFO      oricalcum  GET /api/v1/projects/ws_002/storage -> 200  (567ms)
-2026-06-05 00:06:00  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
-2026-06-05 00:06:00  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/admin/users?page=&per_page= "HTTP/2 200 OK"
-2026-06-05 00:06:00  INFO      oricalcum  GET /api/v1/projects/ws_002/collaborators -> 200  (540ms)
-2026-06-05 00:06:00  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
-2026-06-05 00:06:01  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/admin/users?page=&per_page= "HTTP/2 200 OK"
-2026-06-05 00:06:01  INFO      oricalcum  GET /api/v1/projects/ws_002/collaborators -> 200  (528ms)
-2026-06-05 00:06:01  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
-2026-06-05 00:06:01  INFO      oricalcum  GET /api/v1/projects/ws_002/storage -> 200  (526ms)
-2026-06-05 00:06:01  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
-2026-06-05 00:06:02  INFO      oricalcum  GET /api/v1/projects/ws_002/storage -> 200  (544ms)
-2026-06-05 00:06:02  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
-2026-06-05 00:06:02  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/admin/users?page=&per_page= "HTTP/2 200 OK"
-2026-06-05 00:06:02  INFO      oricalcum  GET /api/v1/projects/ws_002/collaborators -> 200  (542ms)
-2026-06-05 00:06:03  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
-2026-06-05 00:06:03  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/admin/users?page=&per_page= "HTTP/2 200 OK"
-2026-06-05 00:06:03  INFO      oricalcum  GET /api/v1/projects/ws_002/collaborators -> 200  (529ms)
-2026-06-05 00:06:31  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
-2026-06-05 00:06:32  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
-2026-06-05 00:06:32  INFO      oricalcum  GET /api/v1/projects/ws_002/calendar-events -> 200  (773ms)
-2026-06-05 00:06:32  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
-2026-06-05 00:06:32  INFO      oricalcum  GET /api/v1/projects/ws_002 -> 200  (472ms)
-2026-06-05 00:06:32  INFO      oricalcum  GET /api/v1/projects/ws_002/calendar-events -> 200  (415ms)
-2026-06-05 00:06:32  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
-2026-06-05 00:06:32  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
-2026-06-05 00:06:33  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
-2026-06-05 00:06:33  INFO      oricalcum  GET /api/v1/projects/ws_002/nodes -> 200  (970ms)
-2026-06-05 00:06:33  INFO      oricalcum  GET /api/v1/projects/ws_002/edges -> 200  (971ms)
-2026-06-05 00:06:33  INFO      oricalcum  GET /api/v1/projects/ws_002 -> 200  (998ms)
-2026-06-05 00:06:57  INFO      oricalcum  OPTIONS /api/v1/projects/ws_002/calendar-events -> 200  (0ms)
-2026-06-05 00:06:57  INFO      oricalcum  OPTIONS /api/v1/projects/ws_002 -> 200  (1ms)
-2026-06-05 00:06:57  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
-2026-06-05 00:06:58  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
-2026-06-05 00:06:58  INFO      oricalcum  GET /api/v1/projects/ws_002/calendar-events -> 200  (879ms)
-2026-06-05 00:06:58  INFO      oricalcum  GET /api/v1/projects/ws_002 -> 200  (378ms)
-2026-06-05 00:06:58  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
-2026-06-05 00:06:58  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
-2026-06-05 00:06:58  INFO      oricalcum  OPTIONS /api/v1/projects/ws_002/nodes -> 200  (162ms)
-2026-06-05 00:06:58  INFO      oricalcum  OPTIONS /api/v1/projects/ws_002/edges -> 200  (164ms)
-2026-06-05 00:06:59  INFO      oricalcum  GET /api/v1/projects/ws_002/calendar-events -> 200  (648ms)
-2026-06-05 00:06:59  INFO      oricalcum  GET /api/v1/projects/ws_002 -> 200  (738ms)
-2026-06-05 00:06:59  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
-2026-06-05 00:06:59  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
-2026-06-05 00:07:00  INFO      oricalcum  GET /api/v1/projects/ws_002/nodes -> 200  (907ms)
-2026-06-05 00:07:00  INFO      oricalcum  GET /api/v1/projects/ws_002/edges -> 200  (908ms)
-2026-06-05 00:10:07  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
-2026-06-05 00:10:07  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
-2026-06-05 00:10:07  INFO      oricalcum  GET /api/v1/projects/ws_002/calendar-events -> 200  (1185ms)
-2026-06-05 00:10:08  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
-2026-06-05 00:10:08  INFO      oricalcum  GET /api/v1/projects/ws_002 -> 200  (553ms)
-2026-06-05 00:10:08  INFO      oricalcum  GET /api/v1/projects/ws_002/calendar-events -> 200  (466ms)
-2026-06-05 00:10:08  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
-2026-06-05 00:10:08  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
-2026-06-05 00:10:08  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
-2026-06-05 00:10:09  INFO      oricalcum  GET /api/v1/projects/ws_002/nodes -> 200  (1045ms)
-2026-06-05 00:10:09  INFO      oricalcum  GET /api/v1/projects/ws_002/edges -> 200  (1059ms)
-2026-06-05 00:10:09  INFO      oricalcum  GET /api/v1/projects/ws_002 -> 200  (1022ms)
-2026-06-05 00:14:09  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
-2026-06-05 00:14:09  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
-2026-06-05 00:14:09  INFO      oricalcum  GET /api/v1/projects/ws_002/calendar-events -> 200  (1172ms)
-2026-06-05 00:14:10  INFO      oricalcum  GET /api/v1/projects/ws_002 -> 200  (694ms)
-2026-06-05 00:14:10  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
-2026-06-05 00:14:10  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
-2026-06-05 00:14:10  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
-2026-06-05 00:14:10  INFO      oricalcum  GET /api/v1/projects/ws_002/calendar-events -> 200  (792ms)
-2026-06-05 00:14:11  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
-2026-06-05 00:14:11  INFO      oricalcum  GET /api/v1/projects/ws_002/nodes -> 200  (1428ms)
-2026-06-05 00:14:11  INFO      oricalcum  GET /api/v1/projects/ws_002/edges -> 200  (1429ms)
-2026-06-05 00:14:11  INFO      oricalcum  GET /api/v1/projects/ws_002 -> 200  (381ms)
-2026-06-05 00:14:21  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
-2026-06-05 00:14:21  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
-2026-06-05 00:14:21  INFO      oricalcum  GET /api/v1/projects/ws_002/calendar-events -> 200  (860ms)
-2026-06-05 00:14:21  INFO      oricalcum  GET /api/v1/projects/ws_002 -> 200  (678ms)
-2026-06-05 00:14:22  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
-2026-06-05 00:14:22  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
-2026-06-05 00:14:22  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
-2026-06-05 00:14:22  INFO      oricalcum  GET /api/v1/projects/ws_002/calendar-events -> 200  (771ms)
-2026-06-05 00:14:23  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
-2026-06-05 00:14:23  INFO      oricalcum  GET /api/v1/projects/ws_002/edges -> 200  (1382ms)
-2026-06-05 00:14:23  INFO      oricalcum  GET /api/v1/projects/ws_002/nodes -> 200  (1384ms)
-2026-06-05 00:14:23  INFO      oricalcum  GET /api/v1/projects/ws_002 -> 200  (389ms)
-2026-06-05 00:15:30  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
-2026-06-05 00:15:30  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
-2026-06-05 00:15:30  INFO      oricalcum  GET /api/v1/projects/ws_002/calendar-events -> 200  (1062ms)
-2026-06-05 00:15:30  INFO      oricalcum  GET /api/v1/projects/ws_002 -> 200  (636ms)
-2026-06-05 00:15:30  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
-2026-06-05 00:15:31  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
-2026-06-05 00:15:31  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
-2026-06-05 00:15:31  INFO      oricalcum  GET /api/v1/projects/ws_002/calendar-events -> 200  (661ms)
-2026-06-05 00:15:32  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
-2026-06-05 00:15:32  INFO      oricalcum  GET /api/v1/projects/ws_002/nodes -> 200  (1276ms)
-2026-06-05 00:15:32  INFO      oricalcum  GET /api/v1/projects/ws_002/edges -> 200  (1279ms)
-2026-06-05 00:15:32  INFO      oricalcum  GET /api/v1/projects/ws_002 -> 200  (346ms)
+2026-06-05 00:26:35  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
+2026-06-05 00:26:36  INFO      oricalcum  GET /api/v1/projects -> 200  (2059ms)
+2026-06-05 00:26:37  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
+2026-06-05 00:26:37  INFO      oricalcum  GET /api/v1/projects -> 200  (391ms)
+2026-06-05 00:27:10  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
+2026-06-05 00:27:11  INFO      oricalcum  GET /api/v1/projects -> 200  (395ms)
+2026-06-05 00:27:11  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
+2026-06-05 00:27:11  INFO      oricalcum  GET /api/v1/projects -> 200  (361ms)
+2026-06-05 00:27:23  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
+2026-06-05 00:27:24  INFO      oricalcum  POST /api/v1/projects -> 200  (949ms)
+2026-06-05 00:27:28  INFO      oricalcum  OPTIONS /api/v1/projects/ws_0ef0fdf3-4b1b-4df6-a59b-5ab062fe6b21/calendar-events -> 200  (0ms)
+2026-06-05 00:27:28  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
+2026-06-05 00:27:28  INFO      oricalcum  OPTIONS /api/v1/projects/ws_0ef0fdf3-4b1b-4df6-a59b-5ab062fe6b21 -> 200  (0ms)
+2026-06-05 00:27:29  INFO      oricalcum  GET /api/v1/projects/ws_0ef0fdf3-4b1b-4df6-a59b-5ab062fe6b21/calendar-events -> 200  (473ms)
+2026-06-05 00:27:29  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
+2026-06-05 00:27:29  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
+2026-06-05 00:27:29  INFO      oricalcum  GET /api/v1/projects/ws_0ef0fdf3-4b1b-4df6-a59b-5ab062fe6b21 -> 200  (464ms)
+2026-06-05 00:27:30  INFO      oricalcum  GET /api/v1/projects/ws_0ef0fdf3-4b1b-4df6-a59b-5ab062fe6b21/calendar-events -> 200  (1074ms)
+2026-06-05 00:27:30  INFO      oricalcum  OPTIONS /api/v1/projects/ws_0ef0fdf3-4b1b-4df6-a59b-5ab062fe6b21/nodes -> 200  (5ms)
+2026-06-05 00:27:30  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
+2026-06-05 00:27:30  INFO      oricalcum  OPTIONS /api/v1/projects/ws_0ef0fdf3-4b1b-4df6-a59b-5ab062fe6b21/edges -> 200  (119ms)
+2026-06-05 00:27:30  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
+2026-06-05 00:27:30  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
+2026-06-05 00:27:30  INFO      oricalcum  GET /api/v1/projects/ws_0ef0fdf3-4b1b-4df6-a59b-5ab062fe6b21 -> 200  (571ms)
+2026-06-05 00:27:31  INFO      oricalcum  GET /api/v1/projects/ws_0ef0fdf3-4b1b-4df6-a59b-5ab062fe6b21/nodes -> 200  (789ms)
+2026-06-05 00:27:32  INFO      oricalcum  GET /api/v1/projects/ws_0ef0fdf3-4b1b-4df6-a59b-5ab062fe6b21/edges -> 200  (1396ms)
+2026-06-05 00:27:39  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
+2026-06-05 00:27:39  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
+2026-06-05 00:27:40  INFO      oricalcum  GET /api/v1/projects/ws_0ef0fdf3-4b1b-4df6-a59b-5ab062fe6b21/calendar-events -> 200  (1123ms)
+2026-06-05 00:27:40  INFO      oricalcum  GET /api/v1/projects/ws_0ef0fdf3-4b1b-4df6-a59b-5ab062fe6b21 -> 200  (687ms)
+2026-06-05 00:27:40  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
+2026-06-05 00:27:40  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
+2026-06-05 00:27:40  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
+2026-06-05 00:27:41  INFO      oricalcum  GET /api/v1/projects/ws_0ef0fdf3-4b1b-4df6-a59b-5ab062fe6b21/calendar-events -> 200  (774ms)
+2026-06-05 00:27:41  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
+2026-06-05 00:27:41  INFO      oricalcum  GET /api/v1/projects/ws_0ef0fdf3-4b1b-4df6-a59b-5ab062fe6b21/nodes -> 200  (1387ms)
+2026-06-05 00:27:41  INFO      oricalcum  GET /api/v1/projects/ws_0ef0fdf3-4b1b-4df6-a59b-5ab062fe6b21/edges -> 200  (1392ms)
+2026-06-05 00:27:42  INFO      oricalcum  GET /api/v1/projects/ws_0ef0fdf3-4b1b-4df6-a59b-5ab062fe6b21 -> 200  (868ms)
+2026-06-05 00:27:43  INFO      oricalcum  OPTIONS /api/v1/projects/ws_0ef0fdf3-4b1b-4df6-a59b-5ab062fe6b21/storage -> 200  (0ms)
+2026-06-05 00:27:43  INFO      oricalcum  OPTIONS /api/v1/projects/ws_0ef0fdf3-4b1b-4df6-a59b-5ab062fe6b21/storage -> 200  (1ms)
+2026-06-05 00:27:43  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
+2026-06-05 00:27:46  INFO      oricalcum  GET /api/v1/projects/ws_0ef0fdf3-4b1b-4df6-a59b-5ab062fe6b21/storage -> 200  (2532ms)
+2026-06-05 00:27:46  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
+2026-06-05 00:27:46  INFO      oricalcum  GET /api/v1/projects/ws_0ef0fdf3-4b1b-4df6-a59b-5ab062fe6b21/storage -> 200  (557ms)
+2026-06-05 00:27:51  INFO      oricalcum  OPTIONS /api/v1/projects/ws_0ef0fdf3-4b1b-4df6-a59b-5ab062fe6b21/collaborators -> 200  (0ms)
+2026-06-05 00:27:51  INFO      oricalcum  OPTIONS /api/v1/projects/ws_0ef0fdf3-4b1b-4df6-a59b-5ab062fe6b21/collaborators -> 200  (0ms)
+2026-06-05 00:27:51  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
+2026-06-05 00:27:51  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/admin/users?page=&per_page= "HTTP/2 200 OK"
+2026-06-05 00:27:51  INFO      oricalcum  GET /api/v1/projects/ws_0ef0fdf3-4b1b-4df6-a59b-5ab062fe6b21/collaborators -> 200  (550ms)
+2026-06-05 00:27:51  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
+2026-06-05 00:27:52  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/admin/users?page=&per_page= "HTTP/2 200 OK"
+2026-06-05 00:27:52  INFO      oricalcum  GET /api/v1/projects/ws_0ef0fdf3-4b1b-4df6-a59b-5ab062fe6b21/collaborators -> 200  (538ms)
+2026-06-05 00:27:52  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
+2026-06-05 00:27:53  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
+2026-06-05 00:27:53  INFO      oricalcum  GET /api/v1/projects/ws_0ef0fdf3-4b1b-4df6-a59b-5ab062fe6b21/calendar-events -> 200  (617ms)
+2026-06-05 00:27:53  INFO      oricalcum  GET /api/v1/projects/ws_0ef0fdf3-4b1b-4df6-a59b-5ab062fe6b21 -> 200  (717ms)
+2026-06-05 00:27:53  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
+2026-06-05 00:27:53  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
+2026-06-05 00:27:54  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
+2026-06-05 00:27:54  INFO      oricalcum  GET /api/v1/projects/ws_0ef0fdf3-4b1b-4df6-a59b-5ab062fe6b21/calendar-events -> 200  (774ms)
+2026-06-05 00:27:55  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
+2026-06-05 00:27:55  INFO      oricalcum  GET /api/v1/projects/ws_0ef0fdf3-4b1b-4df6-a59b-5ab062fe6b21/nodes -> 200  (1378ms)
+2026-06-05 00:27:55  INFO      oricalcum  GET /api/v1/projects/ws_0ef0fdf3-4b1b-4df6-a59b-5ab062fe6b21/edges -> 200  (1379ms)
+2026-06-05 00:27:55  INFO      oricalcum  GET /api/v1/projects/ws_0ef0fdf3-4b1b-4df6-a59b-5ab062fe6b21 -> 200  (407ms)
+2026-06-05 00:32:40  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
+2026-06-05 00:32:40  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
+2026-06-05 00:32:40  INFO      oricalcum  GET /api/v1/projects/ws_0ef0fdf3-4b1b-4df6-a59b-5ab062fe6b21/calendar-events -> 200  (1611ms)
+2026-06-05 00:32:41  INFO      oricalcum  GET /api/v1/projects/ws_0ef0fdf3-4b1b-4df6-a59b-5ab062fe6b21 -> 200  (696ms)
+2026-06-05 00:32:41  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
+2026-06-05 00:32:41  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
+2026-06-05 00:32:41  INFO      oricalcum  GET /api/v1/projects/ws_0ef0fdf3-4b1b-4df6-a59b-5ab062fe6b21/calendar-events -> 200  (600ms)
+2026-06-05 00:32:41  INFO      oricalcum  GET /api/v1/projects/ws_0ef0fdf3-4b1b-4df6-a59b-5ab062fe6b21 -> 200  (705ms)
+2026-06-05 00:32:41  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
+2026-06-05 00:32:42  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
+2026-06-05 00:32:42  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
+2026-06-05 00:32:42  INFO      oricalcum  GET /api/v1/projects/ws_0ef0fdf3-4b1b-4df6-a59b-5ab062fe6b21/calendar-events -> 200  (726ms)
+2026-06-05 00:32:43  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
+2026-06-05 00:32:43  INFO      oricalcum  GET /api/v1/projects/ws_0ef0fdf3-4b1b-4df6-a59b-5ab062fe6b21/nodes -> 200  (1368ms)
+2026-06-05 00:32:43  INFO      oricalcum  GET /api/v1/projects/ws_0ef0fdf3-4b1b-4df6-a59b-5ab062fe6b21/edges -> 200  (1371ms)
+2026-06-05 00:32:43  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
+2026-06-05 00:32:43  INFO      oricalcum  GET /api/v1/projects/ws_0ef0fdf3-4b1b-4df6-a59b-5ab062fe6b21 -> 200  (542ms)
+2026-06-05 00:32:44  INFO      oricalcum  GET /api/v1/projects/ws_0ef0fdf3-4b1b-4df6-a59b-5ab062fe6b21/calendar-events -> 200  (696ms)

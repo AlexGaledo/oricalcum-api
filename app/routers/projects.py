@@ -2,6 +2,7 @@ import time
 import uuid
 from typing import Annotated
 from fastapi import APIRouter, Depends, HTTPException
+from sqlalchemy import or_
 from sqlalchemy.orm import Session
 from app.db.session import get_db
 from app.db.models import Project
@@ -23,7 +24,13 @@ Db = Annotated[Session, Depends(get_db)]
 
 @router.get("")
 async def list_projects(user: CurrentUser, db: Db):
-    projects = db.query(Project).filter(Project.owner_id == user["id"]).all()
+    # Show workspaces the user is included in: owned OR a collaborator on.
+    uid = user["id"]
+    projects = (
+        db.query(Project)
+        .filter(or_(Project.owner_id == uid, Project.collaborators.any(uid)))
+        .all()
+    )
     return ok([_to_dict(p) for p in projects])
 
 

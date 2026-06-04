@@ -34,17 +34,19 @@ def list_meetings() -> list[dict]:
 def create_meeting(
     title: str,
     start: int,
-    end: int,
+    end: int | None = None,
     description: str | None = None,
     all_day: bool = False,
     color: str | None = None,
 ) -> dict:
     """Schedule a meeting/event in the current workspace's calendar.
 
-    `start` and `end` are unix epoch timestamps in milliseconds. Resolve relative
-    dates the user gives ("tomorrow 3pm") to absolute ms before calling. Returns
-    the created event.
+    `start`/`end` are unix epoch timestamps in milliseconds. Resolve relative dates
+    the user gives ("tomorrow 3pm") to absolute ms before calling. `end` is optional —
+    omit it for a default 1-hour block. Returns the created event.
     """
+    if end is None:
+        end = start + 3_600_000  # default 1h
     if end < start:
         raise ValueError("Meeting end must be at or after start")
     with scoped_session() as s:

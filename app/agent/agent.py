@@ -6,6 +6,7 @@ tools are bound to that request's auth/project scope.
 """
 
 from collections.abc import AsyncIterator
+from datetime import datetime, timezone
 from typing import Any
 
 from langchain_core.messages import AIMessage, AIMessageChunk, BaseMessage, HumanMessage
@@ -47,7 +48,16 @@ def _chunk_text(chunk: AIMessageChunk) -> str:
 async def build_agent(jwt: str, project_id: str) -> Any:
     tools = await load_workspace_tools(jwt, project_id)
     llm = build_llm()
-    return create_react_agent(llm, tools, prompt=SYSTEM_PROMPT)
+    # Inject current time so the agent can resolve relative dates ("tomorrow 3pm")
+    # into absolute unix-ms timestamps for create_meeting.
+    now = datetime.now(timezone.utc)
+    now_ms = int(now.timestamp() * 1000)
+    prompt = (
+        f"{SYSTEM_PROMPT}\n\nCurrent server time: {now.isoformat()} "
+        f"(epoch ms {now_ms}). Treat times the user gives as their local wall-clock "
+        f"unless they specify a timezone; ask if the date is ambiguous."
+    )
+    return create_react_agent(llm, tools, prompt=prompt)
 
 
 async def stream_agent_reply(

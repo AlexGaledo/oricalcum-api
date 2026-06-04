@@ -1,6 +1,22 @@
-from sqlalchemy import BigInteger, Boolean, Column, Float, ForeignKey, Integer, String, Text
+from sqlalchemy import BigInteger, Boolean, Column, Float, ForeignKey, Integer, String, Text, UniqueConstraint
 from sqlalchemy.dialects.postgresql import ARRAY, JSONB
 from app.db.base import Base
+
+
+class CalendarEvent(Base):
+    __tablename__ = "calendar_events"
+
+    id = Column(String, primary_key=True)
+    project_id = Column(String, ForeignKey("projects.id", ondelete="CASCADE"), nullable=False, index=True)
+    title = Column(String, nullable=False)
+    start = Column(BigInteger, nullable=False)
+    end = Column(BigInteger, nullable=False)
+    all_day = Column(Boolean, default=False)
+    description = Column(Text, nullable=True)
+    color = Column(String, nullable=True)
+    url = Column(String, nullable=True)
+    created_at = Column(BigInteger, nullable=False)
+    updated_at = Column(BigInteger, nullable=False)
 
 
 class Project(Base):
@@ -66,6 +82,18 @@ class Document(Base):
     updated_at = Column(BigInteger, nullable=False)
 
 
+class ProjectSecret(Base):
+    __tablename__ = "project_secrets"
+    __table_args__ = (UniqueConstraint("project_id", "key", name="uq_project_secret_key"),)
+
+    id = Column(String, primary_key=True)
+    project_id = Column(String, ForeignKey("projects.id", ondelete="CASCADE"), nullable=False, index=True)
+    key = Column(String, nullable=False)
+    value_encrypted = Column(Text, nullable=False)
+    created_at = Column(BigInteger, nullable=False)
+    updated_at = Column(BigInteger, nullable=False)
+
+
 class Snapshot(Base):
     __tablename__ = "snapshots"
 
@@ -74,4 +102,15 @@ class Snapshot(Base):
     created_by = Column(String, nullable=False)
     name = Column(String, default="")
     data = Column(JSONB, nullable=False)
+    created_at = Column(BigInteger, nullable=False)
+
+
+class ChatMessage(Base):
+    __tablename__ = "chat_messages"
+
+    id = Column(String, primary_key=True)
+    project_id = Column(String, ForeignKey("projects.id", ondelete="CASCADE"), nullable=False, index=True)
+    user_id = Column(String, nullable=False, index=True)
+    role = Column(String, nullable=False)  # "user" | "assistant"
+    content = Column(Text, nullable=False)
     created_at = Column(BigInteger, nullable=False)

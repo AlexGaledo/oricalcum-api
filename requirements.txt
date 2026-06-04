@@ -1,5 +1,5 @@
-fastapi==0.115.5
-uvicorn[standard]==0.32.1
+fastapi>=0.136.0
+uvicorn[standard]>=0.49.0
 pydantic==2.10.3
 pydantic-settings==2.6.1
 supabase==2.10.0
@@ -7,3 +7,13 @@ sqlalchemy==2.0.36
 alembic==1.14.0
 psycopg2-binary==2.9.10
 python-dotenv==1.0.1
+cryptography>=42.0.0
+
+# AI assistant (MCP + LangChain Gemini agent)
+fastmcp>=3.4.0
+mcp>=1.27.0
+langchain>=1.3.0
+langchain-core>=1.4.0
+langchain-google-genai>=4.2.0
+langchain-mcp-adapters>=0.2.0
+langgraph>=1.2.0

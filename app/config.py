@@ -12,6 +12,13 @@ class Settings(BaseSettings):
     supabase_service_key: str
     frontend_url: str = "http://localhost:3000"
     api_prefix: str = "/api/v1"
+    secrets_encryption_key: str | None = None
+
+    # AI assistant
+    google_api_key: str | None = None
+    agent_model: str = "gemini-2.5-flash"
+    # Loopback URL the in-process agent uses to reach the mounted FastMCP server.
+    mcp_internal_url: str = "http://127.0.0.1:8000/mcp/"
 
     @property
     def frontend_urls(self) -> List[str]:

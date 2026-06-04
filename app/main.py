@@ -2,14 +2,23 @@ from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from app.config import Settings
-from app.routers import projects, nodes, edges, documents, sync, snapshots, public, auth
+from app.mcp import mcp
+from app.routers import (
+    projects, nodes, edges, documents, sync, snapshots, public, auth,
+    calendar_events, secrets, chat,
+)
 
 
 def create_app(settings: Settings | None = None) -> FastAPI:
     if settings is None:
         settings = Settings()
 
-    app = FastAPI(title="Oricalcum API", version="1.0.0")
+    # Streamable-http ASGI app exposing the assistant's MCP tools. Mounted at
+    # /mcp -> reachable at /mcp/ . Its lifespan must run inside FastAPI's so
+    # FastMCP's session manager starts.
+    mcp_app = mcp.http_app(path="/")
+
+    app = FastAPI(title="Oricalcum API", version="1.0.0", lifespan=mcp_app.lifespan)
 
     app.add_middleware(
         CORSMiddleware,
@@ -39,6 +48,12 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     app.include_router(sync.router, prefix=prefix)
     app.include_router(snapshots.router, prefix=prefix)
     app.include_router(public.router, prefix=prefix)
+    app.include_router(calendar_events.router, prefix=prefix)
+    app.include_router(secrets.router, prefix=prefix)
+    app.include_router(chat.router, prefix=prefix)
+
+    # In-process MCP server the assistant's agent connects to over loopback HTTP.
+    app.mount("/mcp", mcp_app)
 
     @app.get("/health")
     async def health():

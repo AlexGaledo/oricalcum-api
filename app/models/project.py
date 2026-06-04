@@ -37,6 +37,17 @@ class ProjectShare(BaseModel):
     is_public: bool
 
 
+class CollaboratorAdd(BaseModel):
+    user_id: str | None = None
+    email: str | None = None
+
+
+class CollaboratorOut(BaseModel):
+    user_id: str
+    email: str | None = None
+    is_owner: bool = False
+
+
 class ProjectModel(ProjectBase):
     id: str
     owner_id: str

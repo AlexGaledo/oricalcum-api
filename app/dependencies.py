@@ -1,7 +1,7 @@
 from typing import Annotated
 from fastapi import Depends, HTTPException, status
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
-from gotrue.errors import AuthApiError
+from supabase_auth.errors import AuthApiError
 from app.auth_client import auth_client
 
 bearer_scheme = HTTPBearer()

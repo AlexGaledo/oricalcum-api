@@ -85,3 +85,38 @@ INFO:     Uvicorn running on http://127.0.0.1:3001 (Press CTRL+C to quit)
 2026-06-05 00:32:43  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
 2026-06-05 00:32:43  INFO      oricalcum  GET /api/v1/projects/ws_0ef0fdf3-4b1b-4df6-a59b-5ab062fe6b21 -> 200  (542ms)
 2026-06-05 00:32:44  INFO      oricalcum  GET /api/v1/projects/ws_0ef0fdf3-4b1b-4df6-a59b-5ab062fe6b21/calendar-events -> 200  (696ms)
+2026-06-05 00:59:46  INFO      oricalcum  OPTIONS /api/v1/projects -> 200  (60ms)
+2026-06-05 00:59:46  INFO      oricalcum  OPTIONS /api/v1/projects -> 200  (39ms)
+2026-06-05 00:59:46  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
+2026-06-05 00:59:46  INFO      oricalcum  GET /api/v1/projects -> 200  (766ms)
+2026-06-05 00:59:47  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
+2026-06-05 00:59:47  INFO      oricalcum  GET /api/v1/projects -> 200  (359ms)
+2026-06-05 00:59:51  INFO      oricalcum  OPTIONS /api/v1/projects/ws_002/nodes -> 200  (0ms)
+2026-06-05 00:59:51  INFO      oricalcum  OPTIONS /api/v1/projects/ws_002/edges -> 200  (0ms)
+2026-06-05 00:59:51  INFO      oricalcum  OPTIONS /api/v1/projects/ws_002 -> 200  (0ms)
+2026-06-05 00:59:51  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
+2026-06-05 00:59:52  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
+2026-06-05 00:59:52  INFO      oricalcum  GET /api/v1/projects/ws_002/nodes -> 200  (953ms)
+2026-06-05 00:59:52  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
+2026-06-05 00:59:53  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
+2026-06-05 00:59:53  INFO      oricalcum  GET /api/v1/projects/ws_002 -> 200  (1236ms)
+2026-06-05 00:59:53  INFO      oricalcum  GET /api/v1/projects/ws_002/edges -> 200  (982ms)
+2026-06-05 00:59:53  INFO      oricalcum  GET /api/v1/projects/ws_002/nodes -> 200  (1107ms)
+2026-06-05 00:59:54  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
+2026-06-05 00:59:54  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
+2026-06-05 00:59:54  INFO      oricalcum  GET /api/v1/projects/ws_002 -> 200  (803ms)
+2026-06-05 00:59:54  INFO      oricalcum  GET /api/v1/projects/ws_002/edges -> 200  (808ms)
+2026-06-05 00:59:56  INFO      oricalcum  OPTIONS /api/v1/projects/ws_002/storage -> 200  (1ms)
+2026-06-05 00:59:56  INFO      oricalcum  OPTIONS /api/v1/projects/ws_002/storage -> 200  (1ms)
+2026-06-05 00:59:56  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
+2026-06-05 00:59:58  INFO      oricalcum  GET /api/v1/projects/ws_002/storage -> 200  (1807ms)
+2026-06-05 00:59:58  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
+2026-06-05 00:59:58  INFO      oricalcum  GET /api/v1/projects/ws_002/storage -> 200  (707ms)
+2026-06-05 01:00:01  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
+2026-06-05 01:00:02  INFO      oricalcum  GET /api/v1/projects -> 200  (544ms)
+2026-06-05 01:00:02  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
+2026-06-05 01:00:02  INFO      oricalcum  GET /api/v1/projects -> 200  (394ms)
+2026-06-05 01:00:44  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
+2026-06-05 01:00:44  INFO      oricalcum  GET /api/v1/projects -> 200  (423ms)
+2026-06-05 01:00:44  INFO      httpx  HTTP Request: GET https://vvnepqtwtcnajvdnaucw.supabase.co/auth/v1/user "HTTP/2 200 OK"
+2026-06-05 01:00:44  INFO      oricalcum  GET /api/v1/projects -> 200  (355ms)

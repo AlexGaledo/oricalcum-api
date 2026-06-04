@@ -1,5 +1,5 @@
 from fastapi import APIRouter, HTTPException
-from gotrue.errors import AuthApiError
+from supabase_auth.errors import AuthApiError
 from supabase import create_client
 from app.auth_client import auth_client
 from app.config import get_settings

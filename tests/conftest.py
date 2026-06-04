@@ -14,7 +14,7 @@ from collections.abc import Callable
 
 import pytest
 from fastapi.testclient import TestClient
-from gotrue.errors import AuthRetryableError
+from supabase_auth.errors import AuthRetryableError
 from supabase import create_client
 
 from app.config import get_settings
@@ -31,7 +31,7 @@ _admin = create_client(_settings.supabase_url, _settings.supabase_service_key)
 
 
 def _retry(fn: Callable, attempts: int = 3, delay: float = 1.0):
-    """Absorb the intermittent gotrue 'getaddrinfo failed' (flaky resolver)."""
+    """Absorb the intermittent supabase-auth 'getaddrinfo failed' (flaky resolver)."""
     last: Exception | None = None
     for i in range(attempts):
         try:

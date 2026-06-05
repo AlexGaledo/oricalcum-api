@@ -45,7 +45,28 @@ def _chunk_text(chunk: AIMessageChunk) -> str:
     return "".join(parts)
 
 
-async def build_agent(jwt: str, project_id: str) -> Any:
+def _nodespace_context(nodespaces: dict[str, Any] | None) -> str:
+    """Render the client's nodespace awareness into a prompt block."""
+    if not nodespaces:
+        return ""
+    names = [n for n in (nodespaces.get("names") or []) if n]
+    active = nodespaces.get("active")
+    if not names:
+        return ""
+    listed = ", ".join(names)
+    return (
+        f"\n\nNodespaces in this workspace (explorer files): {listed}. "
+        f"Currently OPEN nodespace: {active or 'unknown'}. "
+        "The nodes/edges your tools see belong to the OPEN nodespace only. You can "
+        "identify any nodespace by its title, but you can read and modify nodes only "
+        "in the open one. If the user asks you to act on a different nodespace, tell "
+        "them to open it first (you cannot switch nodespaces yourself)."
+    )
+
+
+async def build_agent(
+    jwt: str, project_id: str, nodespaces: dict[str, Any] | None = None
+) -> Any:
     tools = await load_workspace_tools(jwt, project_id)
     llm = build_llm()
     # Inject current time so the agent can resolve relative dates ("tomorrow 3pm")
@@ -56,6 +77,7 @@ async def build_agent(jwt: str, project_id: str) -> Any:
         f"{SYSTEM_PROMPT}\n\nCurrent server time: {now.isoformat()} "
         f"(epoch ms {now_ms}). Treat times the user gives as their local wall-clock "
         f"unless they specify a timezone; ask if the date is ambiguous."
+        f"{_nodespace_context(nodespaces)}"
     )
     return create_react_agent(llm, tools, prompt=prompt)
 
@@ -66,10 +88,11 @@ async def stream_agent_reply(
     project_id: str,
     history: list[dict[str, str]],
     user_message: str,
+    nodespaces: dict[str, Any] | None = None,
 ) -> AsyncIterator[str]:
     """Yield the assistant's reply token-by-token. Tool-call turns are run silently;
     only natural-language text is emitted."""
-    agent = await build_agent(jwt, project_id)
+    agent = await build_agent(jwt, project_id, nodespaces)
     messages = _to_messages(history, user_message)
     async for chunk, _meta in agent.astream(
         {"messages": messages}, stream_mode="messages"

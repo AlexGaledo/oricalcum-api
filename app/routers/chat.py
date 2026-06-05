@@ -82,6 +82,8 @@ async def chat(project_id: str, body: ChatRequest, credentials: Credentials, db:
     history = [{"role": r.role, "content": r.content} for r in reversed(rows)]
     _save_message(db, project_id, user["id"], "user", body.message)
 
+    nodespaces = body.context.model_dump() if body.context else None
+
     async def event_stream():
         parts: list[str] = []
         try:
@@ -90,6 +92,7 @@ async def chat(project_id: str, body: ChatRequest, credentials: Credentials, db:
                 project_id=project_id,
                 history=history,
                 user_message=body.message,
+                nodespaces=nodespaces,
             ):
                 parts.append(token)
                 yield f"data: {json.dumps({'delta': token})}\n\n"

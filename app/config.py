@@ -36,10 +36,14 @@ class Settings(BaseSettings):
 
     @property
     def resolved_mcp_url(self) -> str:
-        if self.mcp_internal_url:
-            return self.mcp_internal_url
-        port = os.environ.get("PORT", "8000")
-        return f"http://127.0.0.1:{port}/mcp/"
+        url = self.mcp_internal_url
+        if not url:
+            port = os.environ.get("PORT", "8000")
+            return f"http://127.0.0.1:{port}/mcp/"
+        # Tolerate an env value set without a scheme (httpx requires http(s)://).
+        if not url.startswith(("http://", "https://")):
+            url = f"http://{url}"
+        return url
 
     @property
     def frontend_urls(self) -> List[str]:

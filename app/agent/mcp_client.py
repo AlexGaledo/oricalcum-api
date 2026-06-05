@@ -17,7 +17,7 @@ async def load_workspace_tools(jwt: str, project_id: str) -> list[BaseTool]:
     client = MultiServerMCPClient(
         {
             "oricalcum": {
-                "url": settings.mcp_internal_url,
+                "url": settings.resolved_mcp_url,
                 "transport": "streamable_http",
                 "headers": {
                     "Authorization": f"Bearer {jwt}",

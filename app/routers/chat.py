@@ -1,4 +1,5 @@
 import json
+import logging
 import time
 import uuid
 from typing import Annotated
@@ -15,7 +16,24 @@ from app.db.utils import assert_project_access
 from app.dependencies import authenticate_token, bearer_scheme
 from app.models.chat import ChatRequest
 
+logger = logging.getLogger("oricalcum")
+
 router = APIRouter(prefix="/projects/{project_id}/chat", tags=["chat"])
+
+
+def _flatten_error(exc: BaseException) -> str:
+    """Unwrap anyio/asyncio ExceptionGroups to the real leaf cause.
+
+    The MCP client runs the streamable-http connection inside a TaskGroup, so a
+    failure to reach the loopback MCP server (or a Gemini API error) surfaces as a
+    BaseExceptionGroup whose str() is the unhelpful
+    'unhandled errors in a TaskGroup (1 sub-exception)'. Walk to the leaves and
+    join their actual messages.
+    """
+    if isinstance(exc, BaseExceptionGroup):
+        return "; ".join(_flatten_error(sub) for sub in exc.exceptions)
+    label = type(exc).__name__
+    return f"{label}: {exc}" if str(exc) else label
 
 Db = Annotated[Session, Depends(get_db)]
 Credentials = Annotated[HTTPAuthorizationCredentials, Depends(bearer_scheme)]
@@ -76,7 +94,9 @@ async def chat(project_id: str, body: ChatRequest, credentials: Credentials, db:
                 parts.append(token)
                 yield f"data: {json.dumps({'delta': token})}\n\n"
         except Exception as exc:  # surface to client instead of dropping the stream
-            yield f"event: error\ndata: {json.dumps({'message': str(exc)})}\n\n"
+            message = _flatten_error(exc)
+            logger.exception("Agent stream failed for project %s: %s", project_id, message)
+            yield f"event: error\ndata: {json.dumps({'message': message})}\n\n"
         finally:
             reply = "".join(parts).strip()
             if reply:

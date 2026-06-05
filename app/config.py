@@ -1,3 +1,4 @@
+import os
 from typing import Any
 
 from pydantic_settings import BaseSettings, SettingsConfigDict
@@ -26,9 +27,19 @@ class Settings(BaseSettings):
 
     # AI assistant
     google_api_key: str | None = None
-    agent_model: str = "gemma4"
+    agent_model: str = "gemini-2.0-flash"
     # Loopback URL the in-process agent uses to reach the mounted FastMCP server.
-    mcp_internal_url: str = "http://127.0.0.1:8000/mcp/"
+    # Leave unset on hosted platforms: it is derived from $PORT so the loopback
+    # always targets the port this process actually binds (Render/Railway/Fly bind
+    # a dynamic $PORT, not 8000). Set explicitly only for unusual topologies.
+    mcp_internal_url: str | None = None
+
+    @property
+    def resolved_mcp_url(self) -> str:
+        if self.mcp_internal_url:
+            return self.mcp_internal_url
+        port = os.environ.get("PORT", "8000")
+        return f"http://127.0.0.1:{port}/mcp/"
 
     @property
     def frontend_urls(self) -> List[str]:

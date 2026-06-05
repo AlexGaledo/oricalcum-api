@@ -7,7 +7,7 @@ from fastapi.responses import JSONResponse
 from app.config import Settings
 from app.mcp import mcp
 from app.routers import (
-    projects, nodes, edges, documents, sync, snapshots, public, auth,
+    projects, nodes, edges, nodespaces, documents, sync, snapshots, public, auth,
     calendar_events, secrets, chat, storage,
 )
 
@@ -70,6 +70,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     app.include_router(projects.router, prefix=prefix)
     app.include_router(nodes.router, prefix=prefix)
     app.include_router(edges.router, prefix=prefix)
+    app.include_router(nodespaces.router, prefix=prefix)
     app.include_router(documents.router, prefix=prefix)
     app.include_router(sync.router, prefix=prefix)
     app.include_router(snapshots.router, prefix=prefix)

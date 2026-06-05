@@ -34,11 +34,32 @@ class Project(Base):
     updated_at = Column(BigInteger, nullable=False)
 
 
+class Nodespace(Base):
+    """A graph/file inside a project. Folders nest via parent_id; files own nodes/edges.
+
+    The lightweight coordinate "manifest" (id/title/node positions) is NOT stored
+    here — it is projected from the nodes table on read. This keeps the nodes table
+    the single source of truth while still letting the explorer load layouts fast.
+    """
+    __tablename__ = "nodespaces"
+
+    id = Column(String, primary_key=True)
+    project_id = Column(String, ForeignKey("projects.id", ondelete="CASCADE"), nullable=False, index=True)
+    parent_id = Column(String, ForeignKey("nodespaces.id", ondelete="CASCADE"), nullable=True, index=True)
+    kind = Column(String, nullable=False, default="file")  # "file" | "folder"
+    name = Column(String, nullable=False, default="untitled")
+    expanded = Column(Boolean, default=True)
+    sort = Column(Float, default=0)
+    created_at = Column(BigInteger, nullable=False)
+    updated_at = Column(BigInteger, nullable=False)
+
+
 class Node(Base):
     __tablename__ = "nodes"
 
     id = Column(String, primary_key=True)
     project_id = Column(String, ForeignKey("projects.id", ondelete="CASCADE"), nullable=False, index=True)
+    nodespace_id = Column(String, ForeignKey("nodespaces.id", ondelete="CASCADE"), nullable=True, index=True)
     x = Column(Float, nullable=False)
     y = Column(Float, nullable=False)
     w = Column(Float, nullable=False)
@@ -62,6 +83,7 @@ class Edge(Base):
 
     id = Column(String, primary_key=True)
     project_id = Column(String, ForeignKey("projects.id", ondelete="CASCADE"), nullable=False, index=True)
+    nodespace_id = Column(String, ForeignKey("nodespaces.id", ondelete="CASCADE"), nullable=True, index=True)
     from_node = Column(String, nullable=False)
     to_node = Column(String, nullable=False)
     from_port = Column(String, default="right")

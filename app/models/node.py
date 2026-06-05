@@ -7,6 +7,7 @@ NodeStatus = Literal["active", "archived", "deleted"]
 
 
 class NodeBase(BaseModel):
+    nodespace_id: str | None = None
     x: float
     y: float
     w: float
@@ -35,6 +36,7 @@ class NodeUpdate(NodeBase):
 
 
 class NodePatch(BaseModel):
+    nodespace_id: str | None = None
     x: float | None = None
     y: float | None = None
     w: float | None = None

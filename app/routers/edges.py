@@ -15,10 +15,12 @@ Db = Annotated[Session, Depends(get_db)]
 
 
 @router.get("")
-async def list_edges(project_id: str, user: CurrentUser, db: Db):
+async def list_edges(project_id: str, user: CurrentUser, db: Db, nodespace_id: str | None = None):
     assert_project_access(db, project_id, user["id"])
-    edges = db.query(Edge).filter(Edge.project_id == project_id).all()
-    return ok([_to_dict(e) for e in edges])
+    q = db.query(Edge).filter(Edge.project_id == project_id)
+    if nodespace_id is not None:
+        q = q.filter(Edge.nodespace_id == nodespace_id)
+    return ok([_to_dict(e) for e in q.all()])
 
 
 @router.post("")
@@ -93,6 +95,7 @@ def _to_dict(e: Edge) -> dict:
     return {
         "id": e.id,
         "project_id": e.project_id,
+        "nodespace_id": e.nodespace_id,
         "from_node": e.from_node,
         "to_node": e.to_node,
         "from_port": e.from_port,

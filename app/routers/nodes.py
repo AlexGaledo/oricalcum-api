@@ -15,10 +15,12 @@ Db = Annotated[Session, Depends(get_db)]
 
 
 @router.get("")
-async def list_nodes(project_id: str, user: CurrentUser, db: Db):
+async def list_nodes(project_id: str, user: CurrentUser, db: Db, nodespace_id: str | None = None):
     assert_project_access(db, project_id, user["id"])
-    nodes = db.query(Node).filter(Node.project_id == project_id).all()
-    return ok([_to_dict(n) for n in nodes])
+    q = db.query(Node).filter(Node.project_id == project_id)
+    if nodespace_id is not None:
+        q = q.filter(Node.nodespace_id == nodespace_id)
+    return ok([_to_dict(n) for n in q.all()])
 
 
 @router.post("")
@@ -88,6 +90,7 @@ def _to_dict(n: Node) -> dict:
     return {
         "id": n.id,
         "project_id": n.project_id,
+        "nodespace_id": n.nodespace_id,
         "x": n.x, "y": n.y, "w": n.w, "h": n.h,
         "base_w": n.base_w, "base_h": n.base_h,
         "shape": n.shape,

@@ -7,6 +7,7 @@ AnimationStyle = Literal["flow", "pulse", "orbit"]
 
 
 class EdgeBase(BaseModel):
+    nodespace_id: str | None = None
     from_node: str
     to_node: str
     from_port: Port = "right"
@@ -26,6 +27,7 @@ class EdgeUpdate(EdgeBase):
 
 
 class EdgePatch(BaseModel):
+    nodespace_id: str | None = None
     from_node: str | None = None
     to_node: str | None = None
     from_port: Port | None = None

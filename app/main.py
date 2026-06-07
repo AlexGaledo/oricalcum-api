@@ -16,7 +16,7 @@ logger = logging.getLogger("oricalcum")
 
 def create_app(settings: Settings | None = None) -> FastAPI:
     if settings is None:
-        settings = Settings()
+        settings = Settings() #type:ignore
 
     logging.basicConfig(
         level=getattr(logging, settings.log_level.upper(), logging.INFO),
@@ -24,12 +24,19 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         datefmt="%Y-%m-%d %H:%M:%S",
     )
 
+   
+    
     # Streamable-http ASGI app exposing the assistant's MCP tools. Mounted at
     # /mcp -> reachable at /mcp/ . Its lifespan must run inside FastAPI's so
     # FastMCP's session manager starts.
     mcp_app = mcp.http_app(path="/")
 
     app = FastAPI(title="Oricalcum API", version="1.0.0", lifespan=mcp_app.lifespan)
+    
+    @app.get("/")
+    def home():
+        return {"message": "Welcome to the Oricalcum API!"}
+    
 
     app.add_middleware(
         CORSMiddleware,

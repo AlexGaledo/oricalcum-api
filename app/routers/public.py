@@ -2,7 +2,7 @@ from typing import Annotated
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from app.db.session import get_db
-from app.db.models import Project, Node, Edge
+from app.db.models import Project, Node, Edge, Nodespace
 from app.schemas.response import ok
 
 router = APIRouter(prefix="/public", tags=["public"])
@@ -34,6 +34,37 @@ async def get_public_nodes(project_id: str, db: Db):
 async def get_public_edges(project_id: str, db: Db):
     _get_public_project(project_id, db)
     edges = db.query(Edge).filter(Edge.project_id == project_id).all()
+    return ok([_edge_dict(e) for e in edges])
+
+
+# ── Per-nodespace sharing ──────────────────────────────────────────
+# A single graph can be public independently of its project. These endpoints
+# scope strictly to one nodespace so no sibling graph's data is exposed.
+
+def _get_public_nodespace(nsid: str, db: Session) -> Nodespace:
+    ns = db.get(Nodespace, nsid)
+    if not ns or not ns.is_public:
+        raise HTTPException(status_code=404, detail="Not found")
+    return ns
+
+
+@router.get("/nodespaces/{nsid}")
+async def get_public_nodespace(nsid: str, db: Db):
+    ns = _get_public_nodespace(nsid, db)
+    return ok({"id": ns.id, "name": ns.name, "project_id": ns.project_id})
+
+
+@router.get("/nodespaces/{nsid}/nodes")
+async def get_public_nodespace_nodes(nsid: str, db: Db):
+    _get_public_nodespace(nsid, db)
+    nodes = db.query(Node).filter(Node.nodespace_id == nsid).all()
+    return ok([_node_dict(n) for n in nodes])
+
+
+@router.get("/nodespaces/{nsid}/edges")
+async def get_public_nodespace_edges(nsid: str, db: Db):
+    _get_public_nodespace(nsid, db)
+    edges = db.query(Edge).filter(Edge.nodespace_id == nsid).all()
     return ok([_edge_dict(e) for e in edges])
 
 

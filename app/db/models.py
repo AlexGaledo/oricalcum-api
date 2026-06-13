@@ -50,6 +50,7 @@ class Nodespace(Base):
     name = Column(String, nullable=False, default="untitled")
     expanded = Column(Boolean, default=True)
     sort = Column(Float, default=0)
+    is_public = Column(Boolean, nullable=False, server_default="false", default=False)
     created_at = Column(BigInteger, nullable=False)
     updated_at = Column(BigInteger, nullable=False)
 
